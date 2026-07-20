@@ -1,0 +1,87 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.elysiumhealth.com/.well-known/openid-configuration
+docs: https://www.elysiumhealth.com/llms.txt
+summary:
+  types:
+  - openIdConnect
+  - oauth2
+  - none
+  oauth2_flows:
+  - authorizationCode
+  - refreshToken
+  - jwt-bearer
+  pkce: S256
+  api_key_in: []
+  note: >-
+    Elysium Health publishes no developer API keys. Two authentication surfaces exist: (1) Shopify
+    Customer Account OpenID Connect for shopper identity, and (2) unauthenticated read-only
+    storefront JSON endpoints. The UCP MCP commerce endpoint is unauthenticated at the transport
+    level but requires the calling agent to present a UCP agent profile URI, and requires buyer
+    approval at payment time.
+schemes:
+- name: ShopifyCustomerAccountOIDC
+  type: openIdConnect
+  openIdConnectUrl: https://www.elysiumhealth.com/.well-known/openid-configuration
+  issuer: https://shopify.com/authentication/26818117694
+  authorization_endpoint: https://account.elysiumhealth.com/authentication/oauth/authorize
+  token_endpoint: https://account.elysiumhealth.com/authentication/oauth/token
+  end_session_endpoint: https://account.elysiumhealth.com/authentication/logout
+  jwks_uri: https://account.elysiumhealth.com/authentication/.well-known/jwks.json
+  response_types_supported:
+  - code
+  grant_types_supported:
+  - authorization_code
+  - refresh_token
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  token_endpoint_auth_methods_supported:
+  - client_secret_basic
+  code_challenge_methods_supported:
+  - S256
+  id_token_signing_alg_values_supported:
+  - RS256
+  subject_types_supported:
+  - public
+  claims_supported:
+  - iss
+  - sub
+  - aud
+  - exp
+  - iat
+  - nonce
+  - sid
+  - email
+  - email_verified
+  scopes:
+  - openid
+  - email
+  - customer-account-api:full
+  - customer-account-mcp-api:full
+  sources:
+  - well-known/elysium-openid-configuration.json
+- name: OAuth2AuthorizationServerMetadata
+  type: oauth2
+  rfc: RFC 8414
+  metadata_url: https://www.elysiumhealth.com/.well-known/oauth-authorization-server
+  note: Identical payload to the OIDC discovery document.
+  sources:
+  - well-known/elysium-oauth-authorization-server.json
+- name: Auth0Legacy
+  type: oauth2
+  authorization_endpoint: https://auth.elysiumhealth.com/authorize
+  logout_endpoint: https://auth.elysiumhealth.com/v2/logout
+  note: >-
+    An Auth0 tenant (auth.elysiumhealth.com) is still referenced from storefront account links
+    alongside the newer Shopify Customer Accounts flow.
+  sources:
+  - https://www.elysiumhealth.com/
+- name: NoAuthStorefrontJSON
+  type: none
+  note: >-
+    /products.json, /products/{handle}.json, /collections/{handle}/products.json and
+    /search?q=&type=product require no authentication (provider-documented read-only browsing).
+  sources:
+  - https://www.elysiumhealth.com/llms.txt
+policy_urls:
+  op_policy_uri: https://www.shopify.com/legal/privacy
+  op_tos_uri: https://www.shopify.com/legal/terms
