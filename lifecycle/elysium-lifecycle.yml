@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.elysiumhealth.com/.well-known/ucp
+versioning:
+  scheme: date-based protocol version negotiation (UCP)
+  current: '2026-04-08'
+  supported:
+  - version: '2026-04-08'
+    label: latest stable
+    profile: https://elysiumhealth.myshopify.com/.well-known/ucp/2026-04-08
+  - version: '2026-01-23'
+    profile: https://elysiumhealth.myshopify.com/.well-known/ucp/2026-01-23
+  discovery: https://www.elysiumhealth.com/.well-known/ucp
+  note: >-
+    Versioning is inherited from the Universal Commerce Protocol and from Shopify's platform, not
+    defined by Elysium Health. Older supported versions remain served at their own profile URLs.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  evidence: >-
+    No deprecation or sunset policy is published by Elysium Health. Supported-version rollover is
+    signalled only by the supported_versions map in the UCP merchant profile. No `Deprecation`
+    pointer is emitted.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  probed:
+  - host: https://status.elysiumhealth.com/
+    result: no DNS / not reachable
+  note: >-
+    Elysium Health publishes no status page. Underlying platform status is Shopify's
+    (https://www.shopifystatus.com/), which Elysium does not link. No `StatusPage` pointer is
+    emitted.
+changelog:
+  url: null
+  note: No dated changelog is published for the store or its agent surface.
+deprecated_operations: []

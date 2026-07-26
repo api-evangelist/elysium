@@ -1,0 +1,55 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.elysiumhealth.com/.well-known/ucp
+note: >-
+  Standards conformance observed on Elysium Health's public machine surface. Elysium publishes no
+  compliance program of its own (no SOC 2 / ISO 27001 / HIPAA / PCI claim was found on the site), so
+  no `Compliance` pointer is emitted; card handling is delegated to Shopify and Google Pay.
+standards:
+- id: ucp-2026-04-08
+  name: Universal Commerce Protocol
+  conforms: true
+  evidence: /.well-known/ucp advertises version 2026-04-08 plus 2026-01-23, service dev.ucp.shopping
+  spec: https://ucp.dev/2026-04-08/specification/overview/
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: UCP shopping service exposed with transport "mcp" at /api/ucp/mcp; responds JSON-RPC 2.0
+- id: jsonrpc-2.0
+  conforms: true
+  evidence: MCP endpoint returns {"jsonrpc":"2.0","id":1,"error":{...}}
+- id: openid-connect-discovery
+  name: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence: /.well-known/openid-configuration returns 200 with issuer, jwks_uri, and claims_supported
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server returns 200
+- id: oauth2-pkce-rfc7636
+  conforms: true
+  evidence: code_challenge_methods_supported = [S256]
+- id: oauth2
+  conforms: true
+  evidence: grant_types_supported = authorization_code, refresh_token, jwt-bearer
+- id: llms-txt
+  name: llms.txt agent instructions
+  conforms: true
+  evidence: /llms.txt returns 200 text/markdown
+- id: agents-md
+  conforms: true
+  evidence: /agents.md returns 200 text/markdown; declared canonical by the provider
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors are JSON-RPC 2.0 error objects, not application/problem+json
+- id: openapi
+  conforms: false
+  evidence: no first-party OpenAPI published; UCP tool schemas live upstream at ucp.dev as OpenRPC
+- id: asyncapi
+  conforms: false
+  evidence: no event, streaming, or webhook surface published for this store

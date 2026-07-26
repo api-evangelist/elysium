@@ -1,0 +1,40 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.elysiumhealth.com/api/ucp/mcp
+format: jsonrpc-2.0
+note: >-
+  Elysium Health publishes no error reference. This catalog records the error envelope actually
+  observed on the live UCP MCP endpoint plus the HTTP-level conditions the provider documents in
+  /llms.txt. It is deliberately short — only observed and provider-documented conditions are listed;
+  the full UCP/JSON-RPC error registry lives upstream at ucp.dev and is not copied or inferred here.
+  Responses are NOT RFC 9457 application/problem+json.
+envelope:
+  content_type: application/json
+  shape:
+    jsonrpc: '2.0'
+    id: request id echoed back
+    error:
+      code: integer JSON-RPC error code
+      message: human-readable summary
+      data:
+        code: provider-specific machine code
+        content: human-readable detail
+        continue_url: URL a human can open to continue
+problems:
+- http_status: 422
+  code: -32001
+  provider_code: invalid_profile_url
+  title: UCP discovery failed
+  detail: 'Unable to fetch agent profile: Missing profile uri'
+  remediation: >-
+    Present a UCP agent profile URI with the request; the server will not enumerate tools or
+    transact for an agent it cannot identify.
+  observed: '2026-07-20'
+  source_operation: POST https://www.elysiumhealth.com/api/ucp/mcp#tools/list
+- http_status: 429
+  title: Rate limited
+  detail: The MCP endpoint is rate-limited per IP.
+  remediation: Back off and retry on 429 responses.
+  source: https://www.elysiumhealth.com/llms.txt
+  observed: false
+  documented: true

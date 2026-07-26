@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: generated
+source: https://www.elysiumhealth.com/llms.txt
+note: >-
+  Elysium Health publishes no OpenAPI. These skills are grounded in the agent flow, tool names, and
+  rules the provider publishes verbatim in /llms.txt and /agents.md, and in the capability set
+  advertised at /.well-known/ucp. No operation, tool, or parameter is invented.
+skills:
+- file: elysium-browse-catalog.md
+  name: Browse the Elysium Health catalog
+  api: https://www.elysiumhealth.com/products.json
+  operations:
+  - GET /products.json
+  - GET /products/{handle}.json
+  - GET /collections/{handle}/products.json
+  - GET /search?q={query}&type=product
+- file: elysium-agentic-purchase.md
+  name: Purchase from Elysium Health over UCP with buyer approval
+  api: https://www.elysiumhealth.com/api/ucp/mcp
+  operations:
+  - search_catalog
+  - create_cart
+  - create_checkout
+  - update_checkout
+  - complete_checkout

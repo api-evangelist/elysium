@@ -1,20 +1,169 @@
 aid: elysium
-name: Elysium
-description: Elysium is a company surfaced as a portfolio company of general-catalyst and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+name: Elysium Health
+description: >-
+  Elysium Health is a New York-based consumer longevity and healthspan company founded in 2014 by MIT
+  biologist Leonard Guarente, Eric Marcotulli, and Dan Alminana, and backed by General Catalyst since
+  2016. It translates academic aging research into direct-to-consumer supplements and diagnostics —
+  Basis (NAD+ / nicotinamide riboside plus pterostilbene), Matter, Signal, Format, Mosaic, Cofactor,
+  Vision, Senolytic Complex, Creatine+, and the Index biological-age epigenetic test — supported by a
+  scientific advisory board that includes multiple Nobel laureates and by academic partnerships and
+  clinical trials published through its Aging Research Center. Elysium publishes no traditional
+  developer API program; its machine-readable surface is an agent-facing commerce stack on Shopify —
+  a Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, a UCP MCP endpoint, a
+  published llms.txt / agents.md agent policy, Shopify Customer Account OIDC discovery, and the
+  storefront product/collection JSON endpoints.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.elysiumhealth.com/cdn/shop/files/share_image_a1a0fd7d-58c0-4fe1-9193-9ca03a2dfcae.png?v=1629386234
 url: https://raw.githubusercontent.com/api-evangelist/elysium/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - general-catalyst
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: agentic-commerce-surface
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Health
+- Longevity
+- Supplements
+- Consumer Health
+- Diagnostics
+- Agentic Commerce
+- Universal Commerce Protocol
+- Shopify
+- E-Commerce
+- MCP
+apis:
+- aid: elysium-ucp-shopping
+  name: Elysium Health UCP Shopping (Agentic Commerce)
+  description: >-
+    Elysium Health's storefront implements the Universal Commerce Protocol (UCP) for agent-driven
+    commerce, discoverable at https://www.elysiumhealth.com/.well-known/ucp. The merchant profile
+    advertises the dev.ucp.shopping service over an MCP transport, with capabilities for catalog
+    search and lookup, cart, checkout, fulfillment, discount, and order, plus the Shopify catalog
+    extension and registered payment handlers. Supported protocol versions are 2026-04-08 (latest
+    stable) and 2026-01-23. The store's published agent policy requires contemporaneous human
+    approval before any payment is completed.
+  humanURL: https://www.elysiumhealth.com/llms.txt
+  baseURL: https://www.elysiumhealth.com/api/ucp/mcp
+  tags:
+  - Agentic Commerce
+  - UCP
+  - MCP
+  - Shopping
+  properties:
+  - type: WellKnown
+    url: well-known/elysium-well-known.yml
+  - type: MCPServer
+    url: mcp/elysium-mcp.yml
+- aid: elysium-customer-account
+  name: Elysium Health Customer Account (Shopify OIDC)
+  description: >-
+    Shopify Customer Accounts identity surface for elysiumhealth.com. OpenID Connect discovery is
+    published at https://www.elysiumhealth.com/.well-known/openid-configuration (and mirrored at
+    /.well-known/oauth-authorization-server, RFC 8414), issued by
+    https://shopify.com/authentication/26818117694 with authorization, token, logout, and JWKS
+    endpoints on account.elysiumhealth.com. Authorization code with PKCE (S256), refresh_token, and
+    JWT bearer grants are supported; scopes are openid, email, customer-account-api:full, and
+    customer-account-mcp-api:full.
+  humanURL: https://www.elysiumhealth.com/.well-known/openid-configuration
+  baseURL: https://account.elysiumhealth.com/authentication
+  tags:
+  - Authentication
+  - OpenID Connect
+  - OAuth
+  - Customer Accounts
+  properties:
+  - type: OpenIDConnect
+    url: well-known/elysium-openid-configuration.json
+  - type: OAuthScopes
+    url: scopes/elysium-scopes.yml
+- aid: elysium-storefront-json
+  name: Elysium Health Storefront Product JSON
+  description: >-
+    Read-only, unauthenticated storefront data endpoints published in Elysium Health's agent policy:
+    product listings at /products.json, per-product JSON at /products/{handle}.json, collection
+    listings at /collections/{handle}/products.json, and site search at /search?q={query}&type=product.
+    Eleven products are currently listed, spanning cellular, cognitive, immune, metabolic, skin, eye,
+    and muscle aging plus the Index biological-age test.
+  humanURL: https://www.elysiumhealth.com/collections/all
+  baseURL: https://www.elysiumhealth.com/products.json
+  tags:
+  - Products
+  - Catalog
+  - Storefront
+common:
+- type: DomainSecurity
+  url: security/elysium-domain-security.yml
+- type: Website
+  url: https://www.elysiumhealth.com/
+- type: DeveloperPortal
+  url: https://www.elysiumhealth.com/llms.txt
+- type: Documentation
+  url: https://www.elysiumhealth.com/agents.md
+- type: GettingStarted
+  url: https://www.elysiumhealth.com/llms.txt
+- type: Support
+  url: https://www.elysiumhealth.com/pages/support
+- type: Blog
+  url: https://www.elysiumhealth.com/blogs/aging101
+- type: GitHubOrganization
+  url: https://github.com/ElysiumHealth
+- type: SignUp
+  url: https://www.elysiumhealth.com/account/login
+- type: Pricing
+  url: https://www.elysiumhealth.com/collections/all
+- type: TermsOfService
+  url: https://www.elysiumhealth.com/policies/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.elysiumhealth.com/policies/privacy-policy
+- type: LLMsTxt
+  url: llms/elysium-llms.txt
+- type: AgentsMD
+  url: llms/elysium-agents.md
+- type: WellKnown
+  url: well-known/elysium-well-known.yml
+- type: MCPServer
+  url: mcp/elysium-mcp.yml
+- type: Authentication
+  url: authentication/elysium-authentication.yml
+- type: OAuthScopes
+  url: scopes/elysium-scopes.yml
+- type: Conventions
+  url: conventions/elysium-conventions.yml
+- type: Conformance
+  url: conformance/elysium-conformance.yml
+- type: Lifecycle
+  url: lifecycle/elysium-lifecycle.yml
+- type: DataModel
+  url: data-model/elysium-data-model.yml
+- type: ErrorCatalog
+  url: errors/elysium-problem-types.yml
+- type: AgentSkill
+  name: Browse the Elysium Health catalog
+  url: skills/elysium-browse-catalog.md
+- type: AgentSkill
+  name: Purchase from Elysium Health over UCP with buyer approval
+  url: skills/elysium-agentic-purchase.md
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

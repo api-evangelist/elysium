@@ -1,0 +1,45 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.elysiumhealth.com/
+host: https://www.elysiumhealth.com
+notes: >-
+  Elysium Health runs on Shopify; the /.well-known/ surface is the Shopify-provided agentic-commerce
+  and Customer Account identity discovery set. There is no security.txt, api-catalog, or ai-plugin.json.
+documents:
+- path: /.well-known/ucp
+  description: Universal Commerce Protocol merchant profile (agentic commerce discovery)
+  status: 200
+  content_type: application/json
+  file: elysium-ucp.json
+- path: /.well-known/openid-configuration
+  description: OpenID Connect discovery for Shopify Customer Accounts
+  status: 200
+  content_type: application/json
+  file: elysium-openid-configuration.json
+- path: /.well-known/oauth-authorization-server
+  description: RFC 8414 authorization server metadata (identical payload to OIDC discovery)
+  status: 200
+  content_type: application/json
+  file: elysium-oauth-authorization-server.json
+- path: /.well-known/security.txt
+  description: RFC 9116 security contact
+  status: 404
+- path: /.well-known/api-catalog
+  description: RFC 9727 API catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
+related:
+- path: /llms.txt
+  status: 200
+  content_type: text/markdown
+  file: ../llms/elysium-llms.txt
+- path: /agents.md
+  status: 200
+  content_type: text/markdown
+  file: ../llms/elysium-agents.md
+- path: /robots.txt
+  status: 200
+  note: >-
+    Shopify robots policy declares "Checkouts are for humans" — automated buy-for-me flows that
+    complete payment without a final human review step are not permitted; contact bots@shopify.com.

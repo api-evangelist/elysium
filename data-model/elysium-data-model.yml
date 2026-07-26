@@ -1,0 +1,139 @@
+generated: '2026-07-20'
+method: derived
+source: https://www.elysiumhealth.com/products.json
+note: >-
+  Derived from the live storefront JSON payload (11 products) and the UCP capability set. There is
+  no OpenAPI to derive from; field lists below are the keys actually present in the observed
+  responses. Commerce entities (cart, checkout, order) are named from the UCP capabilities Elysium
+  advertises; their field shapes are defined upstream at ucp.dev and are not asserted here.
+entities:
+- name: Product
+  source: GET /products.json, GET /products/{handle}.json
+  identifier: id
+  slug_field: handle
+  fields:
+  - id
+  - title
+  - handle
+  - body_html
+  - vendor
+  - product_type
+  - tags
+  - created_at
+  - updated_at
+  - published_at
+  - options
+  - variants
+  - images
+  relationships:
+  - type: has_many
+    target: Variant
+    via: variants
+  - type: has_many
+    target: Image
+    via: images
+  - type: has_many
+    target: Option
+    via: options
+- name: Variant
+  identifier: id
+  fields:
+  - id
+  - product_id
+  - title
+  - sku
+  - price
+  - compare_at_price
+  - position
+  - available
+  - taxable
+  - requires_shipping
+  - grams
+  - option1
+  - option2
+  - option3
+  - featured_image
+  - created_at
+  - updated_at
+  relationships:
+  - type: belongs_to
+    target: Product
+    via: product_id
+  - type: has_one
+    target: Image
+    via: featured_image
+- name: Image
+  identifier: id
+  fields:
+  - id
+  - product_id
+  - src
+  - width
+  - height
+  - position
+  - variant_ids
+  - created_at
+  - updated_at
+  relationships:
+  - type: belongs_to
+    target: Product
+    via: product_id
+  - type: has_many
+    target: Variant
+    via: variant_ids
+- name: Option
+  fields:
+  - name
+  - position
+  - values
+  relationships:
+  - type: belongs_to
+    target: Product
+- name: Collection
+  source: GET /collections/{handle}/products.json
+  slug_field: handle
+  relationships:
+  - type: has_many
+    target: Product
+- name: Cart
+  source: UCP capability dev.ucp.shopping.cart
+  schema: https://ucp.dev/2026-04-08/schemas/shopping/cart.json
+  relationships:
+  - type: has_many
+    target: Variant
+- name: Checkout
+  source: UCP capability dev.ucp.shopping.checkout
+  schema: https://ucp.dev/2026-04-08/schemas/shopping/checkout.json
+  relationships:
+  - type: belongs_to
+    target: Cart
+- name: Order
+  source: UCP capability dev.ucp.shopping.order
+  schema: https://ucp.dev/2026-04-08/schemas/shopping/order.json
+  relationships:
+  - type: belongs_to
+    target: Checkout
+catalog_snapshot:
+  date: '2026-07-20'
+  product_count: 11
+  product_types:
+  - Cellular Aging
+  - Cognitive Aging
+  - Immune Aging
+  - Metabolic Aging
+  - Skin Aging
+  - Eye Longevity
+  - Muscle Aging
+  - Rate of Aging
+  products:
+  - {handle: basis, title: Basis, product_type: Cellular Aging}
+  - {handle: matter, title: Matter, product_type: Cognitive Aging}
+  - {handle: signal, title: Signal, product_type: Metabolic Aging}
+  - {handle: format, title: Format, product_type: Immune Aging}
+  - {handle: mosaic, title: Mosaic, product_type: Skin Aging}
+  - {handle: cofactor, title: Cofactor, product_type: Skin Aging}
+  - {handle: vision, title: Vision, product_type: Eye Longevity}
+  - {handle: senolytic-complex, title: Senolytic Complex, product_type: Immune Aging}
+  - {handle: creatine, title: Creatine+, product_type: Muscle Aging}
+  - {handle: index, title: Index, product_type: Rate of Aging}
+  - {handle: longevity-starter-pack, title: Longevity Starter Pack, product_type: null}

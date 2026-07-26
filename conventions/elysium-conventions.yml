@@ -1,0 +1,115 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.elysiumhealth.com/llms.txt
+docs:
+- https://www.elysiumhealth.com/llms.txt
+- https://www.elysiumhealth.com/agents.md
+- https://www.elysiumhealth.com/robots.txt
+- https://ucp.dev/2026-04-08/specification/overview/
+summary: >-
+  Elysium Health has no bespoke API conventions of its own — the machine surface is Shopify's
+  agentic-commerce stack, so the cross-cutting semantics are those of the Universal Commerce
+  Protocol (UCP) over MCP JSON-RPC 2.0, plus Shopify's unauthenticated storefront JSON endpoints.
+  What Elysium does publish first-hand is an explicit agent policy: discovery, the ordered agent
+  flow, buyer-approval and rate-limit rules.
+authentication:
+  style: none for read; OpenID Connect (Shopify Customer Accounts) for customer-scoped access
+  details: authentication/elysium-authentication.yml
+transport:
+  protocol: MCP over HTTP
+  encoding: JSON-RPC 2.0
+  content_type: application/json
+  endpoint: https://www.elysiumhealth.com/api/ucp/mcp
+discovery:
+  well_known: /.well-known/ucp
+  agent_policy:
+  - /llms.txt
+  - /agents.md
+  note: >-
+    Provider states /agents.md is the canonical agent-facing description of the store and /llms.txt
+    mirrors it.
+agent_flow:
+  documented_sequence:
+  - step: discover
+    call: GET /.well-known/ucp
+  - step: search
+    tool: search_catalog
+  - step: cart
+    tool: create_cart
+  - step: checkout
+    tool: create_checkout
+  - step: fulfill
+    tool: update_checkout
+  - step: complete
+    tool: complete_checkout
+idempotency:
+  supported: false
+  evidence: >-
+    Neither /llms.txt, /agents.md nor the UCP merchant profile documents an idempotency key header
+    or retry-safety contract for this store. Idempotency semantics, if any, are defined upstream in
+    the UCP specification at https://ucp.dev/2026-04-08/specification/checkout and are not asserted
+    here. No `Idempotency` pointer is emitted.
+human_in_the_loop:
+  required: true
+  rule: >-
+    Checkout requires contemporaneous human approval — agents must not complete payment without
+    explicit buyer consent. Where an agent cannot obtain approval at the moment of payment, the
+    provider directs it to route through Shop Pay instead.
+  robots_policy: >-
+    "Checkouts are for humans." Automated scraping, buy-for-me agents, or any end-to-end flow that
+    completes payment without a final human review step is not permitted; integrators are directed
+    to the official Shopify Checkout Kit. Contact: bots@shopify.com.
+rate_limits:
+  signaled: true
+  mechanism: HTTP 429 on the MCP endpoint, rate-limited per IP
+  guidance: back off on 429 responses
+  source: https://www.elysiumhealth.com/llms.txt
+request_context:
+  parameters:
+  - name: context.address_country
+    purpose: accurate pricing and availability
+  - name: context.currency
+    purpose: accurate pricing and availability
+versioning:
+  scheme: date-based protocol version negotiation
+  current: '2026-04-08'
+  supported:
+  - '2026-04-08'
+  - '2026-01-23'
+  discovery: /.well-known/ucp advertises supported_versions with per-version profile URLs
+  details: lifecycle/elysium-lifecycle.yml
+errors:
+  envelope: JSON-RPC 2.0 error object
+  shape:
+    code: integer JSON-RPC error code
+    message: string
+    data: object with a provider `code` and human-readable `content`
+  observed_example:
+    code: -32001
+    message: UCP discovery failed
+    data:
+      code: invalid_profile_url
+      content: 'Unable to fetch agent profile: Missing profile uri'
+  http_status_observed: 422
+  format: not RFC 9457 (no application/problem+json)
+pagination:
+  storefront_json:
+    style: page + limit query parameters (Shopify storefront JSON convention)
+    note: >-
+      /products.json accepts `limit`; the store lists 11 products so pagination is not exercised
+      in practice. Not documented by the provider.
+read_only_endpoints:
+- GET /collections/all
+- GET /products/{handle}
+- GET /products/{handle}.json
+- GET /collections/{handle}
+- GET /collections/{handle}/products.json
+- GET /search?q={query}&type=product
+- GET /sitemap.xml
+cross_links:
+  authentication: authentication/elysium-authentication.yml
+  scopes: scopes/elysium-scopes.yml
+  lifecycle: lifecycle/elysium-lifecycle.yml
+  well_known: well-known/elysium-well-known.yml
+  mcp: mcp/elysium-mcp.yml
+  data_model: data-model/elysium-data-model.yml
