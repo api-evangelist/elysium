@@ -49,12 +49,11 @@ tools:
 - name: complete_checkout
   description: Finalize the purchase; buyer must approve payment
   source: https://www.elysiumhealth.com/llms.txt
-tools_note: >-
-  Tool names are those the provider documents in /llms.txt for the typical agent flow. A live
-  `tools/list` call to the endpoint returns JSON-RPC error -32001 `invalid_profile_url`
-  ("Missing profile uri"), i.e. the server requires the calling agent to present a UCP agent
-  profile URI before it will enumerate tools. Full tool schemas are published upstream at
-  https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json — not copied here.
+tools_note: Tool names are those the provider documents in /llms.txt for the typical agent flow. A live
+  `tools/list` call to the endpoint returns JSON-RPC error -32001 `invalid_profile_url` ("Missing profile
+  uri"), i.e. the server requires the calling agent to present a UCP agent profile URI before it will
+  enumerate tools. Full tool schemas are published upstream at https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+  — not copied here.
 probe:
   endpoint: https://www.elysiumhealth.com/api/ucp/mcp
   method: POST tools/list
@@ -65,7 +64,15 @@ probe:
 constraints:
 - Checkout requires contemporaneous human approval; agents must not complete payment without explicit
   buyer consent (provider-published rule in /llms.txt).
-- The site robots.txt declares "Checkouts are for humans" and disallows end-to-end buy-for-me flows
-  that complete payment without a final human review step.
+- The site robots.txt declares "Checkouts are for humans" and disallows end-to-end buy-for-me flows that
+  complete payment without a final human review step.
 - The MCP endpoint is rate-limited per IP; back off on 429.
 - Agents should pass `context.address_country` and `context.currency` for accurate pricing.
+deployment:
+  mode: remote
+  endpoint: https://www.elysiumhealth.com/api/ucp/mcp
+  verified: probed
+  probe: live
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census
