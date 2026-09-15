@@ -1,17 +1,15 @@
 aid: elysium
 name: Elysium Health
-description: >-
-  Elysium Health is a New York-based consumer longevity and healthspan company founded in 2014 by MIT
-  biologist Leonard Guarente, Eric Marcotulli, and Dan Alminana, and backed by General Catalyst since
-  2016. It translates academic aging research into direct-to-consumer supplements and diagnostics —
-  Basis (NAD+ / nicotinamide riboside plus pterostilbene), Matter, Signal, Format, Mosaic, Cofactor,
+description: Elysium Health is a New York-based consumer longevity and healthspan company founded in 2014
+  by MIT biologist Leonard Guarente, Eric Marcotulli, and Dan Alminana, and backed by General Catalyst
+  since 2016. It translates academic aging research into direct-to-consumer supplements and diagnostics
+  — Basis (NAD+ / nicotinamide riboside plus pterostilbene), Matter, Signal, Format, Mosaic, Cofactor,
   Vision, Senolytic Complex, Creatine+, and the Index biological-age epigenetic test — supported by a
-  scientific advisory board that includes multiple Nobel laureates and by academic partnerships and
-  clinical trials published through its Aging Research Center. Elysium publishes no traditional
-  developer API program; its machine-readable surface is an agent-facing commerce stack on Shopify —
-  a Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, a UCP MCP endpoint, a
-  published llms.txt / agents.md agent policy, Shopify Customer Account OIDC discovery, and the
-  storefront product/collection JSON endpoints.
+  scientific advisory board that includes multiple Nobel laureates and by academic partnerships and clinical
+  trials published through its Aging Research Center. Elysium publishes no traditional developer API program;
+  its machine-readable surface is an agent-facing commerce stack on Shopify — a Universal Commerce Protocol
+  (UCP) merchant profile at /.well-known/ucp, a UCP MCP endpoint, a published llms.txt / agents.md agent
+  policy, Shopify Customer Account OIDC discovery, and the storefront product/collection JSON endpoints.
 deliveryModel:
   model: saas
   open_source: false
@@ -59,16 +57,14 @@ tags:
 - E-Commerce
 - MCP
 apis:
-- aid: elysium-ucp-shopping
+- aid: elysium:elysium-ucp-shopping
   name: Elysium Health UCP Shopping (Agentic Commerce)
-  description: >-
-    Elysium Health's storefront implements the Universal Commerce Protocol (UCP) for agent-driven
-    commerce, discoverable at https://www.elysiumhealth.com/.well-known/ucp. The merchant profile
-    advertises the dev.ucp.shopping service over an MCP transport, with capabilities for catalog
-    search and lookup, cart, checkout, fulfillment, discount, and order, plus the Shopify catalog
-    extension and registered payment handlers. Supported protocol versions are 2026-04-08 (latest
-    stable) and 2026-01-23. The store's published agent policy requires contemporaneous human
-    approval before any payment is completed.
+  description: Elysium Health's storefront implements the Universal Commerce Protocol (UCP) for agent-driven
+    commerce, discoverable at https://www.elysiumhealth.com/.well-known/ucp. The merchant profile advertises
+    the dev.ucp.shopping service over an MCP transport, with capabilities for catalog search and lookup,
+    cart, checkout, fulfillment, discount, and order, plus the Shopify catalog extension and registered
+    payment handlers. Supported protocol versions are 2026-04-08 (latest stable) and 2026-01-23. The store's
+    published agent policy requires contemporaneous human approval before any payment is completed.
   humanURL: https://www.elysiumhealth.com/llms.txt
   baseURL: https://www.elysiumhealth.com/api/ucp/mcp
   tags:
@@ -81,16 +77,13 @@ apis:
     url: well-known/elysium-well-known.yml
   - type: MCPServer
     url: mcp/elysium-mcp.yml
-- aid: elysium-customer-account
+- aid: elysium:elysium-customer-account
   name: Elysium Health Customer Account (Shopify OIDC)
-  description: >-
-    Shopify Customer Accounts identity surface for elysiumhealth.com. OpenID Connect discovery is
-    published at https://www.elysiumhealth.com/.well-known/openid-configuration (and mirrored at
-    /.well-known/oauth-authorization-server, RFC 8414), issued by
-    https://shopify.com/authentication/26818117694 with authorization, token, logout, and JWKS
-    endpoints on account.elysiumhealth.com. Authorization code with PKCE (S256), refresh_token, and
-    JWT bearer grants are supported; scopes are openid, email, customer-account-api:full, and
-    customer-account-mcp-api:full.
+  description: Shopify Customer Accounts identity surface for elysiumhealth.com. OpenID Connect discovery
+    is published at https://www.elysiumhealth.com/.well-known/openid-configuration (and mirrored at /.well-known/oauth-authorization-server,
+    RFC 8414), issued by https://shopify.com/authentication/26818117694 with authorization, token, logout,
+    and JWKS endpoints on account.elysiumhealth.com. Authorization code with PKCE (S256), refresh_token,
+    and JWT bearer grants are supported; scopes are openid, email, customer-account-api:full, and customer-account-mcp-api:full.
   humanURL: https://www.elysiumhealth.com/.well-known/openid-configuration
   baseURL: https://account.elysiumhealth.com/authentication
   tags:
@@ -107,14 +100,13 @@ apis:
     url: well-known/elysium-openid-configuration.json
   - type: OAuthScopes
     url: scopes/elysium-scopes.yml
-- aid: elysium-storefront-json
+- aid: elysium:elysium-storefront-json
   name: Elysium Health Storefront Product JSON
-  description: >-
-    Read-only, unauthenticated storefront data endpoints published in Elysium Health's agent policy:
-    product listings at /products.json, per-product JSON at /products/{handle}.json, collection
+  description: 'Read-only, unauthenticated storefront data endpoints published in Elysium Health''s agent
+    policy: product listings at /products.json, per-product JSON at /products/{handle}.json, collection
     listings at /collections/{handle}/products.json, and site search at /search?q={query}&type=product.
     Eleven products are currently listed, spanning cellular, cognitive, immune, metabolic, skin, eye,
-    and muscle aging plus the Index biological-age test.
+    and muscle aging plus the Index biological-age test.'
   humanURL: https://www.elysiumhealth.com/collections/all
   baseURL: https://www.elysiumhealth.com/products.json
   tags:
