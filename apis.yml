@@ -69,6 +69,11 @@ apis:
   baseURL: https://www.elysiumhealth.com/api/ucp/mcp
   tags:
   - Agentic Commerce
+  - Universal Commerce Protocol
+  - MCP
+  - Shopping
+  tags_raw:
+  - Agentic Commerce
   - UCP
   - MCP
   - Shopping
