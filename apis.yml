@@ -82,6 +82,9 @@ apis:
     url: well-known/elysium-well-known.yml
   - type: MCPServer
     url: mcp/elysium-mcp.yml
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: ucp
 - aid: elysium:elysium-customer-account
   name: Elysium Health Customer Account (Shopify OIDC)
   description: Shopify Customer Accounts identity surface for elysiumhealth.com. OpenID Connect discovery
@@ -105,6 +108,9 @@ apis:
     url: well-known/elysium-openid-configuration.json
   - type: OAuthScopes
     url: scopes/elysium-scopes.yml
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: customer-account
 - aid: elysium:elysium-storefront-json
   name: Elysium Health Storefront Product JSON
   description: 'Read-only, unauthenticated storefront data endpoints published in Elysium Health''s agent
@@ -122,6 +128,9 @@ apis:
   - Products
   - Catalog
   - Storefront
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: storefront-json
 common:
 - type: DomainSecurity
   url: security/elysium-domain-security.yml
