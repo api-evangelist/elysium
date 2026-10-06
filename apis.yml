@@ -43,7 +43,7 @@ x-tier: profiled
 x-tier-reason: agentic-commerce-surface
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-10-06'
 tags:
 - Company
 - Health
@@ -132,6 +132,8 @@ apis:
   x-platform: shopify
   x-platform-surface: storefront-json
 common:
+- url: https://www.elysiumhealth.com/blogs/aging101.atom
+  type: BlogRSS
 - type: DomainSecurity
   url: security/elysium-domain-security.yml
 - type: Website
