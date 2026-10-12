@@ -1,0 +1,18 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/elysium/integrations
+- https://zapier.com/apps/elysium-health/integrations
+- https://n8n.io/integrations/elysium/
+- https://composio.dev/toolkits/elysium
+- https://monid.ai/tools/elysium
+checked:
+- https://composio.dev/toolkits/elysium
+- https://monid.ai/tools/elysium
+- https://n8n.io/integrations/elysium/
+- https://zapier.com/apps/elysium-health/integrations
+- https://zapier.com/apps/elysium/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
