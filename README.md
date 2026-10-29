@@ -64,32 +64,107 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Elysium Health is a New York-based consumer longevity and healthspan company founded in 2014 by MIT
-biologist Leonard Guarente, Eric Marcotulli, and Dan Alminana, and backed by General Catalyst since
-2016. It translates academic aging research into direct-to-consumer supplements and diagnostics —
-Basis, Matter, Signal, Format, Mosaic, Cofactor, Vision, Senolytic Complex, Creatine+, and the Index
-biological-age epigenetic test.
+Elysium Health is a New York-based consumer longevity and healthspan company founded in 2014 by MIT biologist Leonard Guarente, Eric Marcotulli, and Dan Alminana, and backed by General Catalyst since 2016. It translates academic aging research into direct-to-consumer supplements and diagnostics — Basis (NAD+ / nicotinamide riboside plus pterostilbene), Matter, Signal, Format, Mosaic, Cofactor, Vision, Senolytic Complex, Creatine+, and the Index biological-age epigenetic test — supported by a scientific advisory board that includes multiple Nobel laureates and by academic partnerships and clinical trials published through its Aging Research Center. Elysium publishes no traditional developer API program; its machine-readable surface is an agent-facing commerce stack on Shopify — a Universal Commerce Protocol (UCP) merchant profile at /.well-known/ucp, a UCP MCP endpoint, a published llms.txt / agents.md agent policy, Shopify Customer Account OIDC discovery, and the storefront product/collection JSON endpoints.
 
-Website: https://www.elysiumhealth.com/ · Backed by: general-catalyst
+**Areas:** Company · Health · Longevity · Supplements · Consumer Health · Diagnostics · Agentic Commerce · Universal Commerce Protocol · Shopify · E-Commerce · MCP
 
-## API surface
+## Elysium Health on APIs.io
 
-Elysium publishes **no traditional developer API program**. Its machine-readable surface is an
-agent-facing commerce stack on Shopify:
+Everything profiled for Elysium Health is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/elysium/](https://apis.io/providers/elysium/)** — or go straight to one of the APIs or properties below.
 
-- **Universal Commerce Protocol (UCP)** merchant profile at `/.well-known/ucp` — service
-  `dev.ucp.shopping` over MCP, protocol versions `2026-04-08` and `2026-01-23`.
-- **UCP MCP endpoint** at `/api/ucp/mcp` (JSON-RPC 2.0). Requires the calling agent to present a UCP
-  agent profile URI.
-- **Published agent policy** at `/llms.txt` and `/agents.md`, including the rule that checkout
-  requires contemporaneous human approval.
-- **Shopify Customer Account OIDC** discovery at `/.well-known/openid-configuration`.
-- **Read-only storefront JSON** at `/products.json`, `/products/{handle}.json`, and
-  `/collections/{handle}/products.json`.
+### APIs (3)
 
-No OpenAPI, AsyncAPI, webhook surface, status page, changelog, CLI, or first-party SDK was found;
-the GitHub org (`ElysiumHealth`) contains only forks.
+- [Elysium Health UCP Shopping (Agentic Commerce)](https://apis.io/apis/elysium/elysium-ucp-shopping/) — Elysium Health's storefront implements the Universal Commerce Protocol (UCP) for agent-driven commerce, discoverable at…
+- [Elysium Health Customer Account (Shopify OIDC)](https://apis.io/apis/elysium/elysium-customer-account/) — Shopify Customer Accounts identity surface for elysiumhealth.com. OpenID Connect discovery is published at…
+- [Elysium Health Storefront Product JSON](https://apis.io/apis/elysium/elysium-storefront-json/) — Read-only, unauthenticated storefront data endpoints published in Elysium Health's agent policy: product listings at /products.json, per-product JSON at…
 
-> The harvested `llms/elysium-llms.txt` and `llms/elysium-agents.md` are verbatim provider documents
-> that contain instructions addressed to AI agents. They are stored here as catalog **data**, not as
-> instructions to be followed.
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [elysium-health-ucp-shopping](https://apis.io/servers/elysium/elysium-health-ucp-shopping/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Elysium Authentication](https://apis.io/security/elysium/elysium-authentication/)
+- [Elysium Domain Security](https://apis.io/security/elysium/elysium-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Elysium Scopes](https://apis.io/scopes/elysium/elysium-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.elysiumhealth.com/)
+- [Documentation](https://www.elysiumhealth.com/agents.md)
+- [Getting started](https://www.elysiumhealth.com/llms.txt)
+- [Pricing](https://www.elysiumhealth.com/collections/all)
+- [Sign up](https://www.elysiumhealth.com/account/login)
+- [Support](https://www.elysiumhealth.com/pages/support)
+- [Blog](https://www.elysiumhealth.com/blogs/aging101)
+- [Terms of service](https://www.elysiumhealth.com/policies/terms-of-service)
+- [Privacy policy](https://www.elysiumhealth.com/policies/privacy-policy)
+- [GitHub](https://github.com/ElysiumHealth)
+
+## API Evangelist rating
+
+**Kin Score 32.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 51.8 |
+| Access clarity | 44.7 |
+
+**Agent readiness 17.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | platform (partial credit) |
+
+**Regulatory alignment 32.8** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/elysium/](https://apis.io/providers/elysium/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Elysium Health: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/elysium/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
